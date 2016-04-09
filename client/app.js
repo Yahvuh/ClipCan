@@ -3,7 +3,6 @@ Template.upload.events({
 		var title = event.target.title.value;
 		var link = event.target.link.value;
 		var description = event.target.description.value;
-
 		var id = Submissions.insert({
 			title: title,
 			link: link,

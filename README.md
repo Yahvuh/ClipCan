@@ -6,3 +6,6 @@ This is the backend to Fraghub
 - [ ] Proper *S/CRUD* backend
 - [ ] User accounts
 - [ ] Vote system/favorites
+
+## Finished
+- [ ] Core functionality
