@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Frag Hub', loggedIn: loggedIn(req) });
+  res.render('index', { loggedIn: loggedIn(req) });
 });
 
 const loggedIn = function(req, res) {

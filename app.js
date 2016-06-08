@@ -26,6 +26,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 
 //Remember, environment variable. Not for production.
 app.use(session({
