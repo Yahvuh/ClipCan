@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs'),
   SALT_WORK_FACTOR = 10;
 
-const userSchema = new Schema( {
+const userSchema = new Schema({
   name: {
     firstname: String,
     lastname: String
@@ -17,7 +17,7 @@ const userSchema = new Schema( {
 
 userSchema.pre('save', function(next) {
   const user = this;
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+//  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const date = new Date();
   user.createdAt = date;
   //user.timeString = months[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear() + " at " + date.getHours() + ":" + ("0" + date.getMinutes()).slice(-2);

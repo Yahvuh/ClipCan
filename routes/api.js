@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Upload = require('../models/Upload');
 
 /* API specific routes */
 router.route('/register')
@@ -17,7 +18,6 @@ router.route('/register')
     //That way /api/register only takes the 200 status codes
     if(username != username.match(/^[a-z\d]+$/i))
       return res.sendStatus(403);
-
 
     let newUser = new User();
     newUser.name = name;
@@ -48,6 +48,32 @@ router.route('/login')
         }
         return res.sendStatus(401);
       });
+    });
+  });
+
+router.route('/upload')
+  .post(function(req, res) {
+    if(!req.session.user)
+      return res.sendStatus(403);
+
+    const username = req.session.user.username;
+    const title = req.body.title;
+    const link = req.body.link;
+    const description = req.body.description;
+    const createdAt = new Date();
+
+    let newUpload = new Upload();
+    newUpload.username = username;
+    newUpload.title = title;
+    newUpload.link = link;
+    newUpload.description = description;
+    newUpload.createdAt = createdAt;
+    newUpload.save(function(err, savedUpload) {
+      if(err)
+        return res.sendStatus(500);
+
+      console.log(savedUpload);
+      return res.send('OK!').status(200);
     });
   });
 
