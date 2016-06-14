@@ -62,12 +62,12 @@ router.post('/logout', function(req, res) {
   res.redirect(req.get('Referer') || '/');
 });
 
-function steamLoggedIn(req, res) {
-  if(req.user) {
-    return true;
-  } else {
-    return false;
-  }
-};
+// function steamLoggedIn(req) {
+//   if(req.user) {
+//     return user = true;
+//   } else {
+//     return user = false;
+//   }
+// };
 
 module.exports = router;

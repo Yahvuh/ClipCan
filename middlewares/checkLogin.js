@@ -1,11 +1,11 @@
+'use strict';
+
 //Am I good at middlewares yet localhost
-var checkLogIn = function(req) {
+const checkLogIn = function(req) {
   if(req.user) {
-    console.log('t')
-    return user = true;
+    return true;
   } else {
-    console.log('f');
-    return user = false;
+    return false;
   }
 };
 
