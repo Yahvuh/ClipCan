@@ -12,9 +12,9 @@
     "debug": "~2.1.1",
     "express": "~4.12.2",
     "express-session": "^1.13.0",
-    "jade": "~1.9.2",
     "mongoose": "^4.4.20",
     "morgan": "~1.5.1",
+    "pug": "^2.0.0-beta3",
     "serve-favicon": "~2.2.0",
     "stylus": "^0.54.5"
   }

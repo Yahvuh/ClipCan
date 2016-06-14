@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express');
 const router = express.Router();
@@ -6,7 +6,7 @@ const User = require('../models/User');
 const Upload = require('../models/Upload');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render('index', { loggedIn: loggedIn(req) });
 });
 
@@ -16,7 +16,7 @@ const loggedIn = function(req, res) {
   } else {
     return true;
   }
-}
+};
 
 router.route('/upload')
   .post(function(req, res) {
@@ -48,7 +48,8 @@ router.route('/register')
   .post(function(req, res) {
     const name = {
       firstname: req.body.firstname, lastname: req.body.lastname
-    }
+    };
+
     const username = req.body.username;
     const password = req.body.password;
     console.log(req.body);
@@ -62,7 +63,7 @@ router.route('/register')
     newUser.name = name;
     newUser.username = username;
     newUser.password = password;
-    newUser.save(function(err, savedUser) {
+    newUser.save(function(err) {
       if(err)
         return res.sendStatus(500);
 

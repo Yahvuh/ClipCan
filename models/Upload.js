@@ -11,5 +11,5 @@ const uploadSchema = new Schema({
   createdAt: {type: Date, default: Date.now}
 });
 
-const Upload = mongoose.model('Upload', uploadSchema);
+const Upload = mongoose.model('upload', uploadSchema);
 module.exports = Upload;
