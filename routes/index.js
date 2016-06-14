@@ -6,23 +6,18 @@ const User = require('../models/User');
 const Upload = require('../models/Upload');
 //const passport = require('passport');
 
-const loggedIn = function(req) {
-  if(!req.session.user) {
-    return false;
-  } else {
-    return true;
-  }
-};
+const steamAuth = require('./steamAuth');
+const checkLogIn = require('../middlewares/checkLogIn');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { loggedIn: loggedIn(req) });
+  console.log(checkLogIn)
+  res.render('index', { loggedIn: checkLogIn(req) });
 });
 
 router.route('/upload')
   .post(function(req, res) {
-    if(!req.session.user)
-      return res.sendStatus(403);
+    if(!req.session.user) { return res.sendStatus(403); }
 
     const username = req.session.user.username;
     const title = req.body.title;
@@ -37,8 +32,7 @@ router.route('/upload')
     newUpload.description = description;
     newUpload.createdAt = createdAt;
     newUpload.save(function(err, savedUpload) {
-      if(err)
-        return res.sendStatus(500);
+      if(err) { return res.sendStatus(500); }
 
       console.log(savedUpload);
       return res.send('OK!').status(200);
@@ -47,9 +41,7 @@ router.route('/upload')
 
 router.route('/register')
   .post(function(req, res) {
-    const name = {
-      firstname: req.body.firstname, lastname: req.body.lastname
-    };
+    const name = { firstname: req.body.firstname, lastname: req.body.lastname };
 
     const username = req.body.username;
     const password = req.body.password;
@@ -57,16 +49,14 @@ router.route('/register')
 
     //Should probably make /register its own route, and if the username is valid, send a 200 http status code and send the information here.
     //That way /api/register only takes the 200 status codes
-    if(username != username.match(/^[a-z\d]+$/i))
-      return res.sendStatus(403);
+    if(username != username.match(/^[a-z\d]+$/i)) { return res.sendStatus(403); }
 
     let newUser = new User();
     newUser.name = name;
     newUser.username = username;
     newUser.password = password;
     newUser.save(function(err) {
-      if(err)
-        return res.sendStatus(500);
+      if(err) { return res.sendStatus(500); }
 
       return res.send('OK!').status(200);
     });
@@ -75,12 +65,10 @@ router.route('/register')
 router.route('/login')
   .post(function(req, res) {
     User.findOne({username: req.body.username}, function(err, user) {
-      if(err)
-        res.send(err);
+      if(err) { res.send(err); }
 
       user.comparePassword(req.body.password, function(err, isMatch) {
-        if(err)
-          res.send(err);
+        if(err) { res.send(err); }
 
         //Correct password.
         if(isMatch) {

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -46,7 +46,7 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
 
     cb(null, isMatch);
   });
-}
+};
 
 const User = mongoose.model('user', userSchema);
 module.exports = User;

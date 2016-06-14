@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express');
 const router = express.Router();
@@ -13,8 +13,8 @@ router.route('/:username')
       if(err)
         return res.sendStatus(404);
 
-      return res.send(user)
-    })
+      return res.send(user);
+    });
   });
 
 

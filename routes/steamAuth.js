@@ -2,6 +2,7 @@
 
 const router = require('express').Router();
 const passport = require('passport');
+const checkLogIn = require('../middlewares/checkLogIn');
 
 //Steam Strategy specific
 const OpenIDStrategy = require('passport-openid').Strategy;
@@ -41,8 +42,7 @@ passport.use(SteamStrategy);
 */
 
 router.get('/', function(req, res) {
-  console.log(req.user);
-  res.render('index', { user: steamLoggedIn(req) });
+  res.render('index', { user: checkLogIn(req) });
 });
 
 router.post('/openid', passport.authenticate('openid'));
