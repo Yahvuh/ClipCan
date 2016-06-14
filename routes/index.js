@@ -4,19 +4,20 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Upload = require('../models/Upload');
+//const passport = require('passport');
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { loggedIn: loggedIn(req) });
-});
-
-const loggedIn = function(req, res) {
+const loggedIn = function(req) {
   if(!req.session.user) {
     return false;
   } else {
     return true;
   }
 };
+
+/* GET home page. */
+router.get('/', function(req, res) {
+  res.render('index', { loggedIn: loggedIn(req) });
+});
 
 router.route('/upload')
   .post(function(req, res) {

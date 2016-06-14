@@ -11,6 +11,9 @@ const session = require('express-session');
 const routes = require('./routes/index');
 const users = require('./routes/users');
 const api = require('./routes/api');
+const steamAuth = require('./routes/steamAuth');
+
+const passport = require('passport');
 
 const app = express();
 
@@ -30,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 
+
 //Remember, environment constiable. Not for production.
 app.use(session({
     secret: "FragHub",
@@ -37,11 +41,19 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/api', api);
+app.use('/auth', steamAuth);
+
+//passport stuff
+app.use(passport.initialize());
+app.use(passport.session());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

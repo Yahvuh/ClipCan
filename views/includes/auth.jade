@@ -1,0 +1,8 @@
+div
+  if !user 
+    form(action="/auth/openid", method="post")
+      input(name="submit", type="image", src="http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_small.png", alt="Sign in through Steam")
+  if user
+    form(action="/auth/logout", method="post")
+      input(type="submit", value="Log Out")
+  
