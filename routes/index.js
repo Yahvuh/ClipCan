@@ -6,10 +6,12 @@ const User = require('../models/User');
 const Upload = require('../models/Upload');
 
 const checkLogIn = require('../middlewares/checkLogIn');
+const findUser = require('../middlewares/findUser');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  console.log(req.user);
+  if(req.user)
+    console.log(res.user);
   res.render('index', { user: checkLogIn(req) });
 });
 
@@ -77,5 +79,20 @@ router.route('/login')
       });
     });
   });
+
+router.get('/account', function(req, res) {
+  if(!req.user)
+    return res.redirect('/');
+
+  let id = req.user.steamId;
+  findUser(id, function(err, res) {
+    if(err)
+      console.log(err);
+    //Assigns the persona name to request.
+    //Makes it easier to access later.
+    req.user.personaname = res.personaname;
+    console.log(req.user);
+  });
+});
 
 module.exports = router;

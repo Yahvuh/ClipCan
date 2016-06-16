@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 
 const routes = require('./routes/index');
-const users = require('./routes/users');
 const api = require('./routes/api');
 const steamAuth = require('./routes/steamAuth');
 
@@ -47,7 +46,6 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/api', api);
 app.use('/auth', steamAuth);
 

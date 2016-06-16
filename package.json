@@ -19,6 +19,7 @@
     "pug": "^2.0.0-beta3",
     "request": "^2.72.0",
     "serve-favicon": "~2.3.0",
+    "steam-web": "^0.3.0",
     "stylus": "^0.54.5"
   }
 }
