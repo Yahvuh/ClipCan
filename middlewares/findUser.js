@@ -14,7 +14,6 @@ const findUser = function(id, callback) {
     callback: function(err, data) {
       if(err)
         console.log(err);
-        
       callback(null, data.response.players[0]);
     }
   });

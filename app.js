@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 
 
-//Remember, environment constiable. Not for production.
+//Remember, environment variable. Not for production.
 app.use(session({
     secret: "FragHub",
     resave: false,

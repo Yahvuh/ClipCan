@@ -4,15 +4,13 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Upload = require('../models/Upload');
-
 const checkLogIn = require('../middlewares/checkLogIn');
-const findUser = require('../middlewares/findUser');
+
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  if(req.user)
-    console.log(res.user);
-  res.render('index', { user: checkLogIn(req) });
+  console.log(req.user);
+  res.render('index', { loggedIn: checkLogIn.loggedIn(req)});
 });
 
 router.route('/upload')
@@ -83,15 +81,11 @@ router.route('/login')
 router.get('/account', function(req, res) {
   if(!req.user)
     return res.redirect('/');
-
-  let id = req.user.steamId;
-  findUser(id, function(err, res) {
-    if(err)
-      console.log(err);
-    //Assigns the persona name to request.
-    //Makes it easier to access later.
-    req.user.personaname = res.personaname;
-    console.log(req.user);
+  User.findOne({steamId: req.user.steamId}, function(err, user) {
+    return res.render('account', {
+      loggedIn: checkLogIn.loggedIn(req),
+      personaname: user.personaname
+    });
   });
 });
 
