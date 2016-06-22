@@ -1,8 +1,12 @@
-div
-  if !loggedIn
-    form(action="/auth/openid", method="post")
-      input(name="submit", type="image", src="http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_small.png", alt="Sign in through Steam")
-  if loggedIn
-    p #{personaname}
-    form(action="/auth/logout", method="post")
-      input(type="submit", value="Log Out")
+if !loggedIn
+  form(action="/auth/openid", method="post")
+    input(name="submit", type="image", src="http://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_small.png", alt="Sign in through Steam")
+if loggedIn
+  div.dropDown
+    a(href="#", class="accDrop") #{personaname} ▼
+    div.dropContent
+      a(href="/account") Your Profile
+      form(action="/auth/logout", method="post")
+        input(type="submit", value="Log Out")
+    
+    
